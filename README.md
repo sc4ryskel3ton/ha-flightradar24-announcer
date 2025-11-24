@@ -1,5 +1,14 @@
 # FlightRadar24 Low-Flying Plane Announcer
 
+![GitHub stars](https://img.shields.io/github/stars/LunaticKrave/ha-flightradar24-announcer?style=social)
+![GitHub forks](https://img.shields.io/github/forks/LunaticKrave/ha-flightradar24-announcer?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/LunaticKrave/ha-flightradar24-announcer?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/LunaticKrave/ha-flightradar24-announcer)
+![GitHub issues](https://img.shields.io/github/issues/LunaticKrave/ha-flightradar24-announcer)
+
+A Home Assistant automation that announces low-flying aircraft overhead using FlightRadar24 data and AI-generated voice notifications.
+
+
 A Home Assistant automation that announces low-flying aircraft overhead using FlightRadar24 data and AI-generated voice notifications.
 
 ## Overview
