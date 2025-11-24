@@ -1,0 +1,122 @@
+alias: FlightRadar24 - Announce Low Flying Plane
+# ============================================================================
+# FlightRadar24 Low-Flying Plane Announcer
+# ============================================================================
+# This Home Assistant automation announces low-flying aircraft overhead using
+# FlightRadar24 data and AI-generated voice notifications via ChatGPT.
+#
+# CONFIGURATION REQUIRED BEFORE USE:
+# ----------------------------------
+# 1. Person Entity (line ~17):
+#    - Replace "person.home_user" with your actual person entity
+#    - Find it in Settings → People
+#
+# 2. Device ID (line ~49):
+#    - Replace "YOUR_DEVICE_ID_HERE" with your voice satellite device ID
+#    - Find it in Settings → Devices & Services → [Your Device] → Device Info
+#
+# 3. Media Player Entity (lines ~38, ~42, ~54):
+#    - Replace "media_player.your_voice_assistant" with your actual media player
+#    - Find it in Developer Tools → States
+#
+# 4. FlightRadar24 Integration:
+#    - Requires the FlightRadar24 integration installed and configured
+#    - Must have a sensor.visible_flights entity set up
+#
+# 5. ChatGPT Conversation Agent:
+#    - Requires conversation.chatgpt agent configured
+#    - Used to generate natural language flight announcements
+#
+# CUSTOMIZATION OPTIONS:
+# ----------------------
+# - Time Window: Currently 8am-11pm (lines ~9-11)
+# - Altitude Threshold: Currently 15,000 feet (line ~13)
+# - Announcement Cooldown: Currently 5 minutes (line ~56)
+# - Volume Level: Currently 0.5/50% (line ~42)
+# - Local Airports: <localairpot>
+#
+# ============================================================================
+description: >
+  Announces the lowest visible plane under 15,000 feet using LLM-generated
+  message (8am–11pm).
+triggers:
+  - entity_id: sensor.visible_flights
+    trigger: state
+conditions:
+  - condition: time
+    after: "08:00:00"
+    before: "22:00:00"
+  - condition: template
+    value_template: >
+      {% set flights = state_attr('sensor.visible_flights', 'flights') %} {% set
+      low_flights = flights | selectattr('altitude', 'defined') |
+      selectattr('altitude', 'lessthan', 15000) | list if flights else [] %} {{
+      low_flights | length > 0 }}
+  - condition: state
+    entity_id: person.home_user
+    state: home
+actions:
+  - variables:
+      flights: "{{ state_attr('sensor.visible_flights', 'flights') }}"
+      lowest_flight: >-
+        {% set low_flights = flights | selectattr('altitude', 'defined') |
+        selectattr('altitude', 'lessthan', 15000) | sort(attribute='altitude') |
+        list %} {{ low_flights | first if low_flights | length > 0 else none }}
+      flight_data: |-
+        {% set f = lowest_flight %} {% if f %}
+          Flight: {{ f.callsign | default('Unknown') }},
+          Airline: {{ f.airline_name | default('Unknown') }},
+          Aircraft: {{ f.aircraft_model | default('Unknown') }} ({{ f.aircraft_type | default('Unknown') }}),
+          Registration: {{ f.aircraft_registration | default('Unknown') }},
+          Route: {{ f.origin_airport_code | default('???') }} → {{ f.destination_airport_code | default('???') }},
+          Altitude: {{ f.altitude | default('Unknown') }} {{ state_attr('sensor.visible_flights', 'config')['altitude_units'].split('(')[-1].replace(')', '') }},
+          Speed: {{ f.ground_speed_kts | default('Unknown') }} knots
+        {% else %}
+          No low-flying aircraft currently overhead
+        {% endif %}
+  - variables:
+      current_volume: >-
+        {{ state_attr('media_player.your_voice_assistant',
+        'volume_level') | default(0.5) }}
+  - target:
+      entity_id: media_player.your_voice_assistant
+    data:
+      volume_level: 0.5
+    action: media_player.volume_set
+  - data:
+      agent_id: conversation.chatgpt
+      text: >-
+        You are an aviation enthusiast making an announcement about a low-flying
+        plane overhead. Share a concise description of the aircraft, airline,
+        and route. Here's the flight data: {{ flight_data }} Make sure you are
+        converting the airport code into the name of the city or the airport
+        name, but only use the airport or city name, not the airport code.  <localairport code>
+        or <localairport code> is the <local airport name> Airport. <localairport code> or <localairport code> is for <local airport name>
+        Airport. Do not announce the registration number, unless it is something
+        special like airforce 1 or airforce 2 If it is something truly unique,
+        vintage or special, please call that out too.  If the aircraft is
+        landing at <local airport name> or <local airport name>, do not descibe how
+        much time it has left in the trip. Keep the response to no more than
+        three sentences
+    response_variable: llm_response
+    action: conversation.process
+  - data:
+      title: Overhead Plane Announcement
+      message: "{{ llm_response.response.speech.plain.speech }}"
+    action: persistent_notification.create
+  - data:
+      preannounce: true
+      message: "{{ llm_response.response.speech.plain.speech }}"
+    target:
+      device_id: YOUR_DEVICE_ID_HERE
+    action: assist_satellite.announce
+  - delay:
+      seconds: 2
+  - target:
+      entity_id: media_player.your_voice_assistant
+    data:
+      volume_level: "{{ current_volume }}"
+    action: media_player.volume_set
+  - delay:
+      minutes: 5
+mode: single
